@@ -79,17 +79,9 @@ public class Inventory {
 
     public void display(){
         System.out.println("背包中的物品有：");
-        for (Item.Type type : Item.Type.values()) {//前面设置枚举类的优势出现了：循环遍历枚举类即可，还有可扩展性
-            Item item = new Item(type.getValue());
-            Iterator<ItemStack> ite = items.iterator();
-            int count = 0;
-            while (ite.hasNext()) {
-                ItemStack next = ite.next();
-                if (!next.getItem().equals(item)) continue;
-                count += next.getItemQuantity();
-            }
-        if (count > 0)
-            System.out.println(item.getName() + "：" + count + "个。");
+        for (ItemStack itemStack : items) {
+            System.out.println("- " + itemStack.getItem().getName() + " x" + itemStack.getItemQuantity());
         }
+        System.out.println("剩余格子：" + (capacity - items.size()) + "/" + capacity);
     }
 }
